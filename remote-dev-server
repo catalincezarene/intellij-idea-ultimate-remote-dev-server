@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -Eeuo pipefail
+
+remote_dev_server="/ide/bin/remote-dev-server.sh"
+
+case "${1:-}" in
+  install-plugins)
+    plugins=()
+    for plugin in ${@:2}; do
+      if [[ ! -z "${plugin}" && -z $(grep --no-messages --line-regexp --regexp "${plugin}" ~/ide_plugins) ]]; then
+        plugins+=("${plugin}")
+      fi
+    done
+    if [[ ${#plugins[@]} -gt 0 ]]; then
+      $remote_dev_server installPlugins /project ${plugins[@]}
+      for plugin in "${plugins[@]}"; do
+          echo "${plugin}" >> ~/ide_plugins
+      done
+    fi
+    ;;
+  run) $remote_dev_server run /project --listenOn 0.0.0.0 --port ${2:-5990} ;;
+  status) $remote_dev_server status /project ;;
+  warm-up) $remote_dev_server warm-up /project ;;
+  *) echo "install-plugins PLUGIN_ID [PLUGIN_ID] ... | run PORT | status | warm-up" ;;
+esac
