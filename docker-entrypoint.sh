@@ -7,9 +7,9 @@ user=${USERNAME:-myuser}
 useradd -u ${USER_UID:-1000} -s /bin/bash -m "${user}"
 chown -R "${user}:${user}" "/home/${user}"
 
-if [[ ! -d "/project" ]]; then
-  mkdir /project
-  chown "${user}:${user}" /project
+if [[ ! -d "${PROJECT_DIR}" ]]; then
+  mkdir -p "${PROJECT_DIR}"
+  chown "${user}:${user}" "${PROJECT_DIR}"
 fi
 
 if [[ -z "${1:-}" ]]; then

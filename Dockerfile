@@ -9,6 +9,8 @@ RUN curl -fsSL -o /ide.tar.gz https://download-cdn.jetbrains.com/idea/ideaIU-202
     tar xfz /ide.tar.gz --strip-components=1 -C /ide && \
     rm /ide.tar.gz
 
+ENV PROJECT_DIR="/project"
+
 COPY remote-dev-server /usr/local/bin/
 
 COPY ./docker-entrypoint.sh /

@@ -13,14 +13,14 @@ case "${1:-}" in
       fi
     done
     if [[ ${#plugins[@]} -gt 0 ]]; then
-      $remote_dev_server installPlugins /project ${plugins[@]}
+      $remote_dev_server installPlugins "${PROJECT_DIR}" ${plugins[@]}
       for plugin in "${plugins[@]}"; do
           echo "${plugin}" >> ~/ide_plugins
       done
     fi
     ;;
-  run) $remote_dev_server run /project --listenOn 0.0.0.0 --port ${2:-5990} ;;
-  status) $remote_dev_server status /project ;;
-  warm-up) $remote_dev_server warm-up /project ;;
+  run) $remote_dev_server run "${PROJECT_DIR}" --listenOn 0.0.0.0 --port ${2:-5990} ;;
+  status) $remote_dev_server status "${PROJECT_DIR}" ;;
+  warm-up) $remote_dev_server warm-up "${PROJECT_DIR}" ;;
   *) echo "install-plugins PLUGIN_ID [PLUGIN_ID] ... | run PORT | status | warm-up" ;;
 esac
