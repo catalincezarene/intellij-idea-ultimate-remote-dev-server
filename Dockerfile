@@ -4,7 +4,7 @@ RUN apt-get update && \
     apt-get install -y curl git gosu && \
     rm -rf /var/lib/apt/lists/*
 
-RUN curl -fsSL -o /ide.tar.gz https://download.jetbrains.com/idea/ideaIU-221.4501.155.tar.gz && \
+RUN curl -fsSL -o /ide.tar.gz https://download.jetbrains.com/idea/ideaIU-221.5080.9.tar.gz && \
     mkdir /ide && \
     tar xfz /ide.tar.gz --strip-components=1 -C /ide && \
     rm /ide.tar.gz
